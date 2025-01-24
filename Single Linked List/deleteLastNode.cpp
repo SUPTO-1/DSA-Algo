@@ -56,22 +56,29 @@ void showOutput(Node* head)
   }
 }
 //========== End Function of Showing Output =================
-//Insert a number in the last
+//Delete the last Node;
 
-Node* addingInLastNode(int lastData , Node* head)
+Node* deleteLastNode(Node* head)
 {
-  Node *tmp = head;
-  while(tmp->next != NULL)
+  if(head->next == NULL)
   {
-    tmp = tmp->next;
+    delete(head);
+    return NULL;
   }
-  Node* newNode = new Node(lastData);
-  tmp->next = newNode;
-  return head;
+  else
+  {
+    Node* tmp = head;
+    while(tmp->next->next != NULL)
+    {
+      tmp = tmp->next;
+    }
+    delete(tmp->next);
+    tmp->next = NULL;
+    return head;
+  }
 }
 int main()
 {
-
   //================= Taking Input in the linked list first ==================
 
   int sizeOfList;
@@ -80,14 +87,10 @@ int main()
 
   //cout<<head->data<<" "<<head->next<<endl;
   //================= End Of Taking Input ===========================
-  //Insert a number in the last
+  //Delete the last Node
 
-  int lastData;
-  cout<<"Enter the Value: ";
-  cin>>lastData;
-
-  head = addingInLastNode(lastData,head);
-  cout<<"Added New Value"<<endl;
+  head = deleteLastNode(head);
+  cout<<"Last Node Deleted"<<endl;
   cout<<"If you want to see the full linked list enter -> 1 else enter -> 2: ";
   int option;
   cin>>option;
@@ -95,6 +98,4 @@ int main()
   {
     showOutput(head);
   }
-
-  //End of Insert a number in the last
 }

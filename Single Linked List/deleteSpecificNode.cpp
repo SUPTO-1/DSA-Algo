@@ -56,22 +56,34 @@ void showOutput(Node* head)
   }
 }
 //========== End Function of Showing Output =================
-//Insert a number in the last
+//Start of deleting specific Position newNode
 
-Node* addingInLastNode(int lastData , Node* head)
+Node* deletePositionNode(int specificPosition, Node* head)
 {
-  Node *tmp = head;
-  while(tmp->next != NULL)
+  if(specificPosition == 1)
   {
-    tmp = tmp->next;
+    Node* tmp = head;
+    head = head->next;
+    delete(tmp);
+    return head;
   }
-  Node* newNode = new Node(lastData);
-  tmp->next = newNode;
-  return head;
+  else
+  {
+    Node* tmp = head;
+    int i=1;
+    while(i<specificPosition-1)
+    {
+      tmp = tmp->next;
+      i++;
+    }
+    Node* deleteIt = tmp->next;
+    tmp->next = tmp->next->next;
+    delete(deleteIt);
+    return head;
+  }
 }
 int main()
 {
-
   //================= Taking Input in the linked list first ==================
 
   int sizeOfList;
@@ -80,14 +92,12 @@ int main()
 
   //cout<<head->data<<" "<<head->next<<endl;
   //================= End Of Taking Input ===========================
-  //Insert a number in the last
-
-  int lastData;
-  cout<<"Enter the Value: ";
-  cin>>lastData;
-
-  head = addingInLastNode(lastData,head);
-  cout<<"Added New Value"<<endl;
+  //Delete specific position Node
+  int deletePosition;
+  cout<<"Enter The delete position Node: ";
+  cin>>deletePosition;
+  head = deletePositionNode(deletePosition,head);
+  cout<<"Specific Position Node Deleted"<<endl;
   cout<<"If you want to see the full linked list enter -> 1 else enter -> 2: ";
   int option;
   cin>>option;
@@ -95,6 +105,4 @@ int main()
   {
     showOutput(head);
   }
-
-  //End of Insert a number in the last
 }
