@@ -56,54 +56,50 @@ void showOutput(Node* head)
   }
 }
 //========== End Function of Showing Output =================
-
-// Insert a Number Before a Given Node
-
-Node* beforeInsertNode(int beforeSpecificNode,int beforeTargetNode,Node* head)
+// Insert a Number in a specific Position
+Node* specificPositionNode(int specificNode,int specificPosition,Node* head)
 {
-  if(head->data == beforeTargetNode)
+  if(specificPosition == 1)
   {
-    Node* newNode = new Node(beforeSpecificNode);
+    Node* newNode = new Node(specificNode);
     newNode->next = head;
     return newNode;
   }
   else
   {
-    Node* currentNode = head;
-    Node* prevNode = NULL;
-    while(currentNode!=NULL && currentNode->data != beforeTargetNode)
+    int i=1;
+    Node* tmp = head;
+    while(i<specificPosition-1)
     {
-      prevNode = currentNode;
-      currentNode = currentNode->next;
+      tmp = tmp->next;
+      i++;
     }
-    Node* newNode = new Node(beforeSpecificNode);
-    prevNode->next = newNode;
-    newNode->next = currentNode;
+    Node* newNode = new Node(specificNode);
+    newNode->next = tmp->next;
+    tmp->next = newNode;
     return head;
   }
 }
 int main()
 {
-
   //================= Taking Input in the linked list first ==================
 
   int sizeOfList;
   cin>>sizeOfList;
   Node* head = TakeInput(sizeOfList);
 
-//cout<<head->data<<" "<<head->next<<endl;
-//================= End Of Taking Input ===========================
+  //cout<<head->data<<" "<<head->next<<endl;
+  //================= End Of Taking Input ===========================
 
+ //  Insert a number in a specific Position
 
-// Insert a Number Before a Given Node
-
-int beforeSpecificNode;
-cout<<"Enter The value: ";
-cin>>beforeSpecificNode;
-int beforeTargetNode;
-cout<<"Enter The value of Node where you want to add your new value before it"<<endl;
-cin>>beforeTargetNode;
- head = beforeInsertNode(beforeSpecificNode,beforeTargetNode,head);
+ int specificNode;
+ cout<<"Enter The value: ";
+ cin>>specificNode;
+ int specificPosition;
+ cout<<"Enter The value of Node where you want to add your new value After it"<<endl;
+ cin>>specificPosition;
+ head = specificPositionNode(specificNode,specificPosition,head); // if we don't return head it will not create any issue as well
  cout<<"Added New Value"<<endl;
  cout<<"If you want to see the full linked list enter -> 1 else enter -> 2: ";
  int option;
@@ -112,5 +108,6 @@ cin>>beforeTargetNode;
  {
    showOutput(head);
  }
+
 
 }

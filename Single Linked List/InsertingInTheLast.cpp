@@ -56,31 +56,18 @@ void showOutput(Node* head)
   }
 }
 //========== End Function of Showing Output =================
+//Insert a number in the last
 
-// Insert a Number Before a Given Node
-
-Node* beforeInsertNode(int beforeSpecificNode,int beforeTargetNode,Node* head)
+Node* addingInLastNode(int lastData , Node* head)
 {
-  if(head->data == beforeTargetNode)
+  Node *tmp = head;
+  while(tmp->next != NULL)
   {
-    Node* newNode = new Node(beforeSpecificNode);
-    newNode->next = head;
-    return newNode;
+    tmp = tmp->next;
   }
-  else
-  {
-    Node* currentNode = head;
-    Node* prevNode = NULL;
-    while(currentNode!=NULL && currentNode->data != beforeTargetNode)
-    {
-      prevNode = currentNode;
-      currentNode = currentNode->next;
-    }
-    Node* newNode = new Node(beforeSpecificNode);
-    prevNode->next = newNode;
-    newNode->next = currentNode;
-    return head;
-  }
+  Node* newNode = new Node(lastData);
+  tmp->next = newNode;
+  return head;
 }
 int main()
 {
@@ -91,26 +78,21 @@ int main()
   cin>>sizeOfList;
   Node* head = TakeInput(sizeOfList);
 
-//cout<<head->data<<" "<<head->next<<endl;
-//================= End Of Taking Input ===========================
+  //cout<<head->data<<" "<<head->next<<endl;
+  //================= End Of Taking Input ===========================
+  //Insert a number in the last
 
+  int lastData;
+  cout<<"Enter the Value: ";
+  cin>>lastData;
 
-// Insert a Number Before a Given Node
-
-int beforeSpecificNode;
-cout<<"Enter The value: ";
-cin>>beforeSpecificNode;
-int beforeTargetNode;
-cout<<"Enter The value of Node where you want to add your new value before it"<<endl;
-cin>>beforeTargetNode;
- head = beforeInsertNode(beforeSpecificNode,beforeTargetNode,head);
- cout<<"Added New Value"<<endl;
- cout<<"If you want to see the full linked list enter -> 1 else enter -> 2: ";
- int option;
- cin>>option;
- if(option==1)
- {
-   showOutput(head);
- }
-
+  head = addingInLastNode(lastData,head);
+  cout<<"Added New Value"<<endl;
+  cout<<"If you want to see the full linked list enter -> 1 else enter -> 2: ";
+  int option;
+  cin>>option;
+  if(option==1)
+  {
+    showOutput(head);
+  }
 }
