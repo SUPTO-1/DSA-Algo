@@ -98,4 +98,6 @@ int main()
   {
     showOutput(head);
   }
+
+  //End of Delete the last Node
 }
